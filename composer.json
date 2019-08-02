@@ -1,17 +1,19 @@
 {
     "name": "udaltsov/exceptionally",
-    "description": "Udaltsov Exceptionally",
+    "description": "Exceptionally",
     "type": "library",
     "require": {
         "php": "^7.1"
     },
     "require-dev": {
-        "symfony/phpunit-bridge": "^4.3"
+        "friendsofphp/php-cs-fixer": "^2.15",
+        "symfony/phpunit-bridge": "^4.3",
+        "vimeo/psalm": "^3.4"
     },
     "license": "MIT",
     "authors": [
         {
-            "name": "Valentin",
+            "name": "Valentin Udaltsov",
             "email": "udaltsov.valentin@gmail.com"
         }
     ],

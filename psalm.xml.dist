@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<psalm
+        totallyTyped="true"
+        strictBinaryOperands="true"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="https://getpsalm.org/schema/config"
+        xsi:schemaLocation="https://getpsalm.org/schema/config vendor/vimeo/psalm/config.xsd"
+>
+    <projectFiles>
+        <directory name="src"/>
+        <ignoreFiles>
+            <directory name="vendor"/>
+            <file name="src/Infrastructure/Kernel.php"/>
+        </ignoreFiles>
+    </projectFiles>
+
+    <issueHandlers>
+        <ImplicitToStringCast errorLevel="suppress"/>
+        <MissingConstructor errorLevel="suppress"/>
+        <MissingParamType errorLevel="suppress"/>
+        <MissingReturnType errorLevel="suppress"/>
+        <MixedAssignment errorLevel="suppress"/>
+        <MixedOperand errorLevel="suppress"/>
+    </issueHandlers>
+    <plugins>
+        <pluginClass class="Weirdan\DoctrinePsalmPlugin\Plugin"/>
+        <pluginClass class="App\Infrastructure\Psalm\WebmozartAssertPlugin"/>
+    </plugins>
+</psalm>
