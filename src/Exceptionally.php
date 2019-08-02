@@ -28,6 +28,7 @@ final class Exceptionally
 
     /**
      * @var null|callable|string
+     * @psalm-var null|callable(\ErrorException):\Throwable|class-string<\Throwable>
      */
     private $exception;
 
@@ -37,6 +38,8 @@ final class Exceptionally
     private $ignoreSuppressed = true;
 
     /**
+     * @param mixed[] $args
+     *
      * @return mixed
      */
     public function __invoke(...$args)
@@ -52,6 +55,9 @@ final class Exceptionally
         return $new;
     }
 
+    /**
+     * @param mixed[] $args
+     */
     public function args(...$args): self
     {
         $new = clone $this;
@@ -78,6 +84,7 @@ final class Exceptionally
 
     /**
      * @param null|callable|string $exception
+     * @psalm-param null|callable(\ErrorException):\Throwable|class-string<\Throwable> $exception
      */
     public function exception($exception): self
     {
@@ -88,6 +95,8 @@ final class Exceptionally
     }
 
     /**
+     * @param mixed[] $args
+     *
      * @return mixed
      */
     public function run(...$args)

@@ -10,6 +10,8 @@ function exceptionally(): Exceptionally
 }
 
 /**
+ * @param mixed[] $args
+ *
  * @return mixed
  */
 function exceptionallyRun(callable $callable, ...$args)
