@@ -13,6 +13,12 @@ use Udaltsov\Exceptionally\Exception\UserNoticeException;
 use Udaltsov\Exceptionally\Exception\UserWarningException;
 use Udaltsov\Exceptionally\Exception\WarningException;
 
+/**
+ * @internal
+ * @covers \Udaltsov\Exceptionally\Exceptionally
+ *
+ * @small
+ */
 final class ExceptionallyTest extends TestCase
 {
     public function testWarning(): void
@@ -51,7 +57,7 @@ final class ExceptionallyTest extends TestCase
 
         (new Exceptionally())
             ->callable(static function (): void {
-                define('constant', 1, true);
+                \define('constant', 1, true);
             })
             ->run()
         ;
@@ -68,7 +74,7 @@ final class ExceptionallyTest extends TestCase
 
         (new Exceptionally())
             ->callable(static function () use ($error): void {
-                trigger_error($error, constant($error));
+                trigger_error($error, \constant($error));
             })
             ->run()
         ;
@@ -85,7 +91,7 @@ final class ExceptionallyTest extends TestCase
     public function testDefaultArgs(): void
     {
         (new Exceptionally())
-            ->callable(static function ($arg) {
+            ->callable(static function ($arg): void {
                 self::assertSame('offset', $arg);
             })
             ->args('offset')
@@ -119,7 +125,7 @@ final class ExceptionallyTest extends TestCase
             ->run()
         ;
 
-        self::assertSame('Undefined index: a', error_get_last()['message']);
+        static::assertSame('Undefined index: a', error_get_last()['message']);
     }
 
     public function testExceptionClass(): void
@@ -137,7 +143,7 @@ final class ExceptionallyTest extends TestCase
                 ->run()
             ;
         } catch (\Throwable $exception) {
-            self::assertInstanceOf(NoticeException::class, $exception->getPrevious());
+            static::assertInstanceOf(NoticeException::class, $exception->getPrevious());
 
             throw $exception;
         }
@@ -151,7 +157,7 @@ final class ExceptionallyTest extends TestCase
             ->callable(static function (): void {
                 []['a'];
             })
-            ->exception(static function (\ErrorException $error) {
+            ->exception(static function (\ErrorException $error): void {
                 self::assertSame(E_NOTICE, $error->getSeverity());
 
                 throw new \RuntimeException();

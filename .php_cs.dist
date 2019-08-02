@@ -23,15 +23,7 @@ return
             '@PhpCsFixer' => true,
             '@PhpCsFixer:risky' => true,
             '@PHPUnit60Migration:risky' => true,
-            'date_time_immutable' => true,
-            //'final_class' => true,
             'php_unit_size_class' => true,
-            'php_unit_strict' => false,
-            //'phpdoc_to_comment' => false,
-            //'phpdoc_types_order' => ['null_adjustment' => 'always_last'],
-            //'phpdoc_var_without_name' => false,
-            //'return_assignment' => false,
-            //'single_line_comment_style' => ['comment_types' => ['hash']],
         ])
         ->setFinder($finder)
     ;

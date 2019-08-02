@@ -27,7 +27,7 @@ final class Exceptionally
     private $level = E_ALL;
 
     /**
-     * @var string|callable|null
+     * @var null|callable|string
      */
     private $exception;
 
@@ -77,7 +77,7 @@ final class Exceptionally
     }
 
     /**
-     * @param string|callable|null $exception
+     * @param null|callable|string $exception
      */
     public function exception($exception): self
     {
@@ -138,11 +138,11 @@ final class Exceptionally
 
     private function wrapError(\ErrorException $error): \Throwable
     {
-        if (is_callable($this->exception)) {
+        if (\is_callable($this->exception)) {
             return ($this->exception)($error);
         }
 
-        if (is_string($this->exception)) {
+        if (\is_string($this->exception)) {
             $class = $this->exception;
 
             return new $class($error->getMessage(), 0, $error);
