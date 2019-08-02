@@ -114,6 +114,9 @@ final class ExceptionallyTest extends TestCase
         ;
     }
 
+    /**
+     * @doesNotPerformAssertions
+     */
     public function testLevel(): void
     {
         (new Exceptionally())
@@ -124,8 +127,6 @@ final class ExceptionallyTest extends TestCase
             ->level(E_WARNING)
             ->run()
         ;
-
-        static::assertSame('Undefined index: a', error_get_last()['message']);
     }
 
     public function testExceptionClass(): void
@@ -157,10 +158,10 @@ final class ExceptionallyTest extends TestCase
             ->callable(static function (): void {
                 []['a'];
             })
-            ->exception(static function (\ErrorException $error): void {
-                self::assertSame(E_NOTICE, $error->getSeverity());
+            ->exception(static function (\ErrorException $error): \RuntimeException {
+                self::assertInstanceOf(NoticeException::class, $error);
 
-                throw new \RuntimeException();
+                return new \RuntimeException();
             })
             ->run()
         ;
