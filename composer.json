@@ -1,6 +1,6 @@
 {
     "name": "udaltsov/exceptionally",
-    "description": "Exceptionally helps converting errors to exceptions",
+    "description": "Converts errors into exceptions easily",
     "type": "library",
     "license": "MIT",
     "authors": [
