@@ -2,20 +2,20 @@
 
 declare(strict_types=1);
 
-namespace Udaltsov\Exceptionally;
+namespace VUdaltsov\Exceptionally;
 
 use PHPUnit\Framework\TestCase;
-use Udaltsov\Exceptionally\Exception\DeprecatedException;
-use Udaltsov\Exceptionally\Exception\NoticeException;
-use Udaltsov\Exceptionally\Exception\UserDeprecatedException;
-use Udaltsov\Exceptionally\Exception\UserErrorException;
-use Udaltsov\Exceptionally\Exception\UserNoticeException;
-use Udaltsov\Exceptionally\Exception\UserWarningException;
-use Udaltsov\Exceptionally\Exception\WarningException;
+use VUdaltsov\Exceptionally\Exception\DeprecatedException;
+use VUdaltsov\Exceptionally\Exception\NoticeException;
+use VUdaltsov\Exceptionally\Exception\UserDeprecatedException;
+use VUdaltsov\Exceptionally\Exception\UserErrorException;
+use VUdaltsov\Exceptionally\Exception\UserNoticeException;
+use VUdaltsov\Exceptionally\Exception\UserWarningException;
+use VUdaltsov\Exceptionally\Exception\WarningException;
 
 /**
  * @internal
- * @covers \Udaltsov\Exceptionally\Exceptionally
+ * @covers \VUdaltsov\Exceptionally\Exceptionally
  *
  * @small
  */

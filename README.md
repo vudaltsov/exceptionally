@@ -5,8 +5,8 @@ A PHP library that converts errors into exceptions easily.
 ```php
 <?php
 
-use function Udaltsov\Exceptionally\exceptionallyCall;
-use Udaltsov\Exceptionally\Exception\WarningException;
+use function VUdaltsov\Exceptionally\exceptionallyCall;
+use VUdaltsov\Exceptionally\Exception\WarningException;
 
 try {
     $handle = exceptionallyCall('fopen', 'data.xml', 'rb');
@@ -30,8 +30,8 @@ The `exceptionallyCall(callable $callable, mixed ...args): mixed` function allow
 ```php
 <?php
 
-use function Udaltsov\Exceptionally\exceptionallyCall;
-use Udaltsov\Exceptionally\Exception\WarningException;
+use function VUdaltsov\Exceptionally\exceptionallyCall;
+use VUdaltsov\Exceptionally\Exception\WarningException;
 
 try {
     $file = 'data.xml';
@@ -50,8 +50,8 @@ For instance, you can specify the error severity level (see [`set_error_handler(
 ```php
 <?php
 
-use function Udaltsov\Exceptionally\exceptionally;
-use Udaltsov\Exceptionally\Exception\NoticeException;
+use function VUdaltsov\Exceptionally\exceptionally;
+use VUdaltsov\Exceptionally\Exception\NoticeException;
 
 $accessor = exceptionally()
     ->callable(static function (array $array, string $offset): string {
@@ -72,7 +72,7 @@ You can even set the default arguments.
 ```php
 <?php
 
-use function Udaltsov\Exceptionally\exceptionally;
+use function VUdaltsov\Exceptionally\exceptionally;
 
 $mkdir = exceptionally()
     ->callable('mkdir')
@@ -87,7 +87,7 @@ By default suppressed errors are not thrown, but you can enable that.
 ```php
 <?php
 
-use function Udaltsov\Exceptionally\exceptionally;
+use function VUdaltsov\Exceptionally\exceptionally;
 
 exceptionally()
     ->throwSuppressed()
@@ -108,14 +108,14 @@ Exceptionally throws subclasses of the native [`ErrorException`](https://www.php
 
 | Error level | Exception class |
 | --- | --- |
-| `E_WARNING` | `Udaltsov\Exceptionally\Exception\WarningException` |
-| `E_NOTICE` | `Udaltsov\Exceptionally\Exception\NoticeException` |
-| `E_RECOVERABLE_ERROR` | `Udaltsov\Exceptionally\Exception\RecoverableErrorException` |
-| `E_DEPRECATED` | `Udaltsov\Exceptionally\Exception\DeprecatedException` |
-| `E_USER_ERROR` | `Udaltsov\Exceptionally\Exception\UserErrorException` |
-| `E_USER_WARNING` | `Udaltsov\Exceptionally\Exception\UserWarningException` |
-| `E_USER_NOTICE` | `Udaltsov\Exceptionally\Exception\UserNoticeException` |
-| `E_USER_DEPRECATED` | `Udaltsov\Exceptionally\Exception\UserDeprecatedException` |
+| `E_WARNING` | `VUdaltsov\Exceptionally\Exception\WarningException` |
+| `E_NOTICE` | `VUdaltsov\Exceptionally\Exception\NoticeException` |
+| `E_RECOVERABLE_ERROR` | `VUdaltsov\Exceptionally\Exception\RecoverableErrorException` |
+| `E_DEPRECATED` | `VUdaltsov\Exceptionally\Exception\DeprecatedException` |
+| `E_USER_ERROR` | `VUdaltsov\Exceptionally\Exception\UserErrorException` |
+| `E_USER_WARNING` | `VUdaltsov\Exceptionally\Exception\UserWarningException` |
+| `E_USER_NOTICE` | `VUdaltsov\Exceptionally\Exception\UserNoticeException` |
+| `E_USER_DEPRECATED` | `VUdaltsov\Exceptionally\Exception\UserDeprecatedException` |
 
 Note that `E_ERROR`, `E_PARSE`, `E_CORE_ERROR`, `E_CORE_WARNING`, `E_COMPILE_ERROR`, `E_COMPILE_WARNING` levels are not supported, because they can not be handled with the [`set_error_handler`](https://www.php.net/manual/en/function.set-error-handler.php) function.
 

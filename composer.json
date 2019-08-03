@@ -1,5 +1,5 @@
 {
-    "name": "udaltsov/exceptionally",
+    "name": "vudaltsov/exceptionally",
     "description": "Converts errors into exceptions easily",
     "type": "library",
     "license": "MIT",
@@ -19,7 +19,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Udaltsov\\Exceptionally\\": "src"
+            "VUdaltsov\\Exceptionally\\": "src"
         },
         "files": [
             "functions.php"
@@ -27,7 +27,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Udaltsov\\Exceptionally\\": "tests"
+            "VUdaltsov\\Exceptionally\\": "tests"
         }
     },
     "archive": {

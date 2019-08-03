@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Udaltsov\Exceptionally\Exception;
+namespace VUdaltsov\Exceptionally\Exception;
 
 class WarningException extends \ErrorException
 {

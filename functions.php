@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Udaltsov\Exceptionally;
+namespace VUdaltsov\Exceptionally;
 
 function exceptionally(): Exceptionally
 {

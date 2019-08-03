@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Udaltsov\Exceptionally;
+namespace VUdaltsov\Exceptionally;
 
-use Udaltsov\Exceptionally\Exception\NoCallableException;
+use VUdaltsov\Exceptionally\Exception\NoCallableException;
 
 final class Exceptionally
 {
