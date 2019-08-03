@@ -31,7 +31,7 @@ final class ExceptionallyTest extends TestCase
             ->callable(static function (): void {
                 readlink(__FILE__);
             })
-            ->run()
+            ->call()
         ;
     }
 
@@ -45,7 +45,7 @@ final class ExceptionallyTest extends TestCase
             ->callable(static function (): void {
                 []['a'];
             })
-            ->run()
+            ->call()
         ;
     }
 
@@ -59,7 +59,7 @@ final class ExceptionallyTest extends TestCase
             ->callable(static function (): void {
                 \define('constant', 1, true);
             })
-            ->run()
+            ->call()
         ;
     }
 
@@ -76,7 +76,7 @@ final class ExceptionallyTest extends TestCase
             ->callable(static function () use ($error): void {
                 trigger_error($error, \constant($error));
             })
-            ->run()
+            ->call()
         ;
     }
 
@@ -95,7 +95,7 @@ final class ExceptionallyTest extends TestCase
                 self::assertSame('offset', $arg);
             })
             ->args('offset')
-            ->run()
+            ->call()
         ;
     }
 
@@ -110,7 +110,7 @@ final class ExceptionallyTest extends TestCase
                 @[]['a'];
             })
             ->ignoreSuppressed(false)
-            ->run()
+            ->call()
         ;
     }
 
@@ -125,7 +125,7 @@ final class ExceptionallyTest extends TestCase
             })
             ->ignoreSuppressed(false)
             ->level(E_WARNING)
-            ->run()
+            ->call()
         ;
     }
 }

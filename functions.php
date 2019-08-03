@@ -14,11 +14,11 @@ function exceptionally(): Exceptionally
  *
  * @return mixed
  */
-function exceptionallyRun(callable $callable, ...$args)
+function exceptionallyCall(callable $callable, ...$args)
 {
     return
         (new Exceptionally())
             ->callable($callable)
-            ->run(...$args)
+            ->call(...$args)
         ;
 }

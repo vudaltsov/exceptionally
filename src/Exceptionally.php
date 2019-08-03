@@ -35,7 +35,7 @@ final class Exceptionally
      */
     public function __invoke(...$args)
     {
-        return $this->run(...$args);
+        return $this->call(...$args);
     }
 
     public function callable(callable $callable): self
@@ -78,7 +78,7 @@ final class Exceptionally
      *
      * @return mixed
      */
-    public function run(...$args)
+    public function call(...$args)
     {
         if (null === $this->callable) {
             throw NoCallableException::create();
