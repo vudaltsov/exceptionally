@@ -45,7 +45,7 @@ try {
 
 In advanced cases use the `exceptionally(): Exceptionally` function. It returns an [**immutable**](#immutability) configurator. 
 
-For instance, you can specify the error severity level (see [`set_error_handler(..., $error_types)`](https://www.php.net/manual/en/function.set-error-handler.php) for details). By default all errors (`E_ALL`) are captured.
+For instance, you can specify the error severity level (see [`set_error_handler(..., $error_types)`](https://www.php.net/manual/en/function.set-error-handler.php#refsect1-function.set-error-handler-parameters) for details). By default all errors (`E_ALL`) are captured.
 
 ```php
 <?php
@@ -90,17 +90,17 @@ By default suppressed errors are not thrown, but you can enable that.
 use function Udaltsov\Exceptionally\exceptionally;
 
 exceptionally()
+    ->throwSuppressed()
     ->callable(static function (): void {
         @include __DIR__.'/script.php';
     })
-    ->throwSuppressed()
     ->call()
 ;
 ```
 
 ### Immutability
 
-The `exceptionally()` configurator is immutable. It returns a new object on each call (same as [PSR-7](https://www.php-fig.org/psr/psr-7/) Messages). Hence, you can safely reuse a preconfigured instance.
+The `exceptionally()` configurator is immutable. It returns a new object on each call (same as [PSR-7](https://www.php-fig.org/psr/psr-7/) Messages). Hence, you can safely reuse a preconfigured instance in your code.
 
 ### Exceptions
 
