@@ -5,12 +5,12 @@ workflow "Lint" {
 
 action "PHP-CS-Fixer" {
   uses = "docker://oskarstark/php-cs-fixer-ga"
-  args = "--diff --dry-run --allow-risky=yes"
   secrets = ["GITHUB_TOKEN"]
+  args = "--diff --dry-run --allow-risky=yes"
 }
 
 action "psalm" {
-  uses = "psalm"
+  uses = "docker://mickaelandrieu/psalm-ga"
   needs = ["PHP-CS-Fixer"]
   secrets = ["GITHUB_TOKEN"]
   args = " --diff --diff-methods"
