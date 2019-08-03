@@ -5,5 +5,5 @@ workflow "Lint" {
 
 action "PHP-CS-Fixer" {
   uses = "docker://oskarstark/php-cs-fixer-ga"
-  args = "--diff --dry-run"
+  args = "--diff --dry-run --allow-risky=yes"
 }
