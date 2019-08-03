@@ -27,12 +27,18 @@ final class ExceptionallyTest extends TestCase
         $this->expectExceptionMessage('Invalid argument');
         $this->expectExceptionCode(0);
 
-        (new Exceptionally())
-            ->callable(static function (): void {
-                readlink(__FILE__);
-            })
-            ->call()
-        ;
+        try {
+            (new Exceptionally())
+                ->callable(static function (): void {
+                    readlink(__FILE__);
+                })
+                ->call()
+            ;
+        } catch (\ErrorException $exception) {
+            static::assertSame(E_WARNING, $exception->getSeverity());
+
+            throw $exception;
+        }
     }
 
     public function testNotice(): void
@@ -41,12 +47,18 @@ final class ExceptionallyTest extends TestCase
         $this->expectExceptionMessage('Undefined index: a');
         $this->expectExceptionCode(0);
 
-        (new Exceptionally())
-            ->callable(static function (): void {
-                []['a'];
-            })
-            ->call()
-        ;
+        try {
+            (new Exceptionally())
+                ->callable(static function (): void {
+                    []['a'];
+                })
+                ->call()
+            ;
+        } catch (\ErrorException $exception) {
+            static::assertSame(E_NOTICE, $exception->getSeverity());
+
+            throw $exception;
+        }
     }
 
     public function testDeprecated(): void
@@ -55,12 +67,18 @@ final class ExceptionallyTest extends TestCase
         $this->expectExceptionMessage('define(): Declaration of case-insensitive constants is deprecated');
         $this->expectExceptionCode(0);
 
-        (new Exceptionally())
-            ->callable(static function (): void {
-                \define('constant', 1, true);
-            })
-            ->call()
-        ;
+        try {
+            (new Exceptionally())
+                ->callable(static function (): void {
+                    \define('constant', 1, true);
+                })
+                ->call()
+            ;
+        } catch (\ErrorException $exception) {
+            static::assertSame(E_DEPRECATED, $exception->getSeverity());
+
+            throw $exception;
+        }
     }
 
     /**
@@ -72,12 +90,18 @@ final class ExceptionallyTest extends TestCase
         $this->expectExceptionMessage($error);
         $this->expectExceptionCode(0);
 
-        (new Exceptionally())
-            ->callable(static function () use ($error): void {
-                trigger_error($error, \constant($error));
-            })
-            ->call()
-        ;
+        try {
+            (new Exceptionally())
+                ->callable(static function () use ($error): void {
+                    trigger_error($error, \constant($error));
+                })
+                ->call()
+            ;
+        } catch (\ErrorException $exception) {
+            static::assertSame(\constant($error), $exception->getSeverity());
+
+            throw $exception;
+        }
     }
 
     public function userErrorData(): \Generator
