@@ -1,9 +1,17 @@
 workflow "Lint" {
   on = "push"
-  resolves = ["phpunit"]
+  resolves = [
+    "phpunit",
+  ]
+}
+
+action "composer" {
+  uses = "MilesChou/composer-action@master"
+  args = "install -q --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist"
 }
 
 action "phpunit" {
-  uses = "./.github/actions/phpunit"
-  secrets = ["GITHUB_TOKEN"]
+  needs = ["composer"]
+  uses = "./.github/actions/phpunit/"
+  args = ""
 }
