@@ -31,6 +31,8 @@ final class Exceptionally
     /**
      * @param mixed[] $args
      *
+     * @throws \ErrorException
+     *
      * @return mixed
      */
     public function __invoke(...$args)
@@ -75,6 +77,8 @@ final class Exceptionally
 
     /**
      * @param mixed[] $args
+     *
+     * @throws \ErrorException
      *
      * @return mixed
      */

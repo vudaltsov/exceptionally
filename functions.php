@@ -12,6 +12,8 @@ function exceptionally(): Exceptionally
 /**
  * @param mixed[] $args
  *
+ * @throws \ErrorException
+ *
  * @return mixed
  */
 function exceptionallyCall(callable $callable, ...$args)
