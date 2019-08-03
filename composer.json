@@ -29,5 +29,10 @@
         "psr-4": {
             "Udaltsov\\Exceptionally\\": "tests"
         }
+    },
+    "archive": {
+        "exclude": [
+            "/tests"
+        ]
     }
 }
