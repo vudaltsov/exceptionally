@@ -37,7 +37,7 @@ try {
     $file = 'data.xml';
     $handle = exceptionallyCall('touch', $file);
 } catch (WarningException $exception) {
-    throw FailedToTouchFileException::fromFile($file, $exception);
+    throw new FailedToTouchFileException($file, 0, $exception);
 }
 ```
 
