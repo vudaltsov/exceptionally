@@ -1,9 +1,29 @@
-workflow "Lint" {
+workflow "main" {
   on = "push"
-  resolves = ["PHP-CS-Fixer"]
+  resolves = [
+    "phpunit",
+    "psalm",
+    "php-cs-fixer",
+  ]
 }
 
-action "PHP-CS-Fixer" {
-  uses = "docker://oskarstark/php-cs-fixer-ga"
-  args = "--diff --dry-run --allow-risky=yes"
+action "composer" {
+  uses = "MilesChou/composer-action@master"
+  args = "update"
+}
+
+action "phpunit" {
+  needs = ["composer"]
+  uses = "./.github/phpunit/"
+}
+
+action "psalm" {
+  uses = "./.github/psalm/"
+  needs = ["composer"]
+}
+
+action "php-cs-fixer" {
+  uses = "./.github/php-cs-fixer/"
+  needs = ["composer"]
+  args = "--allow-risky=yes --dry-run --diff --diff-format=udiff -vv"
 }
