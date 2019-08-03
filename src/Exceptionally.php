@@ -6,9 +6,6 @@ namespace Udaltsov\Exceptionally;
 
 use Udaltsov\Exceptionally\Exception\NoCallableException;
 
-/**
- * @internal
- */
 final class Exceptionally
 {
     /**
