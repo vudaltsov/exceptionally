@@ -1,17 +1,16 @@
 workflow "Lint" {
   on = "push"
-  resolves = ["psalm"]
+  resolves = ["phpunit"]
 }
 
-action "PHP-CS-Fixer" {
-  uses = "docker://oskarstark/php-cs-fixer-ga"
+action "composer" {
+  uses = "MilesChou/composer-action@master"
+  runs = "install"
   secrets = ["GITHUB_TOKEN"]
-  args = "--diff --dry-run --allow-risky=yes"
 }
 
-action "psalm" {
-  uses = "docker://mickaelandrieu/psalm-ga"
-  needs = ["PHP-CS-Fixer"]
+action "phpunit" {
+  uses = "./.github/actions/phpunit"
+  needs = ["composer"]
   secrets = ["GITHUB_TOKEN"]
-  args = " --diff --diff-methods --root=/github/home"
 }
