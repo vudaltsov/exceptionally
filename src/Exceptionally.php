@@ -88,7 +88,7 @@ final class Exceptionally
             throw NoCallableException::create();
         }
 
-        set_error_handler([$this, 'handler'], $this->level);
+        set_error_handler([$this, 'handle'], $this->level);
 
         try {
             return ($this->callable)(...$args ?: $this->args);
@@ -97,10 +97,26 @@ final class Exceptionally
         }
     }
 
-    public function handler(int $level, string $message, string $file, int $line): bool
+    /**
+     * @internal
+     */
+    public function handle(int $level, string $message, string $file, int $line): bool
     {
         if (!$this->throwSuppressed && 0 === error_reporting()) {
             return false;
+        }
+
+        // try to find the actual caller for string callables
+        if (!self::isExternalCaller($file)) {
+            /** @psalm-var array{file: ?string, line: ?int} $record */
+            foreach (debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS) as $record) {
+                if (isset($record['file'], $record['line']) && self::isExternalCaller($record['file'])) {
+                    $file = $record['file'];
+                    $line = $record['line'];
+
+                    break;
+                }
+            }
         }
 
         switch ($level) {
@@ -124,5 +140,19 @@ final class Exceptionally
             default:
                 throw new \ErrorException($message, 0, $level, $file, $line);
         }
+    }
+
+    private static function isExternalCaller(string $file): bool
+    {
+        static $files;
+
+        if (!isset($files)) {
+            $files = [
+                __FILE__ => true,
+                \dirname(__DIR__).'/functions.php' => true,
+            ];
+        }
+
+        return !isset($files[$file]);
     }
 }

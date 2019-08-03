@@ -152,4 +152,50 @@ final class ExceptionallyTest extends TestCase
             ->call()
         ;
     }
+
+    public function testClosureFileAndLine(): void
+    {
+        try {
+            (new Exceptionally())
+                ->callable(static function (): void {
+                    []['a'];
+                })
+                ->call()
+            ;
+        } catch (\ErrorException $exception) {
+            static::assertSame(__FILE__, $exception->getFile());
+            static::assertSame(__LINE__ - 6, $exception->getLine());
+        }
+    }
+
+    public function testInvokableFileAndLine(): void
+    {
+        try {
+            (new Exceptionally())
+                ->callable(new class() {
+                    public function __invoke(): void
+                    {
+                        []['a'];
+                    }
+                })
+                ->call()
+            ;
+        } catch (\ErrorException $exception) {
+            static::assertSame(__FILE__, $exception->getFile());
+            static::assertSame(__LINE__ - 7, $exception->getLine());
+        }
+    }
+
+    public function testStringFileAndLine(): void
+    {
+        try {
+            (new Exceptionally())
+                ->callable('readlink')
+                ->call(__FILE__)
+            ;
+        } catch (\ErrorException $exception) {
+            static::assertSame(__FILE__, $exception->getFile());
+            static::assertSame(__LINE__ - 4, $exception->getLine());
+        }
+    }
 }
