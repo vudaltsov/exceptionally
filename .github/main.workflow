@@ -2,7 +2,7 @@ workflow "Lint" {
   on = "push"
   resolves = [
     "phpunit",
-    "phpunit2",
+    "psalm",
   ]
 }
 
@@ -16,7 +16,7 @@ action "phpunit" {
   uses = "./actions/phpunit/"
 }
 
-action "phpunit2" {
-  uses = "./actions/phpunit/"
+action "psalm" {
+  uses = "./actions/psalm/"
   needs = ["composer"]
 }
