@@ -99,7 +99,7 @@ final class ExceptionallyTest extends TestCase
         ;
     }
 
-    public function testIgnoreSuppressed(): void
+    public function testThrowSuppressed(): void
     {
         $this->expectException(NoticeException::class);
         $this->expectExceptionMessage('Undefined index: a');
@@ -109,7 +109,7 @@ final class ExceptionallyTest extends TestCase
             ->callable(static function (): void {
                 @[]['a'];
             })
-            ->ignoreSuppressed(false)
+            ->throwSuppressed()
             ->call()
         ;
     }
@@ -123,7 +123,7 @@ final class ExceptionallyTest extends TestCase
             ->callable(static function (): void {
                 @[]['a'];
             })
-            ->ignoreSuppressed(false)
+            ->throwSuppressed()
             ->level(E_WARNING)
             ->call()
         ;

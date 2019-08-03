@@ -26,7 +26,7 @@ final class Exceptionally
     /**
      * @var bool
      */
-    private $ignoreSuppressed = true;
+    private $throwSuppressed = false;
 
     /**
      * @param mixed[] $args
@@ -67,10 +67,10 @@ final class Exceptionally
         return $new;
     }
 
-    public function ignoreSuppressed(bool $ignoreSuppressed): self
+    public function throwSuppressed(bool $throwSuppressed = true): self
     {
         $new = clone $this;
-        $new->ignoreSuppressed = $ignoreSuppressed;
+        $new->throwSuppressed = $throwSuppressed;
 
         return $new;
     }
@@ -99,7 +99,7 @@ final class Exceptionally
 
     public function handler(int $level, string $message, string $file, int $line): bool
     {
-        if ($this->ignoreSuppressed && 0 === error_reporting()) {
+        if (!$this->throwSuppressed && 0 === error_reporting()) {
             return false;
         }
 
