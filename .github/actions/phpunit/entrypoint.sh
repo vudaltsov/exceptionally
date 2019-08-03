@@ -2,4 +2,4 @@
 set -eu
 
 #  Run phpunit Tests
-vendor/bin/simple-phpunit $*
+vendor/bin/phpunit $*
