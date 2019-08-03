@@ -7,11 +7,10 @@ workflow "Lint" {
 
 action "composer" {
   uses = "MilesChou/composer-action@master"
-  args = "install -q --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist"
+  args = "update"
 }
 
 action "phpunit" {
   needs = ["composer"]
-  uses = "./.github/actions/phpunit/"
-  args = ""
+  uses = "./actions/phpunit/"
 }
