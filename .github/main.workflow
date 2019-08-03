@@ -14,16 +14,16 @@ action "composer" {
 
 action "phpunit" {
   needs = ["composer"]
-  uses = "./actions/phpunit/"
+  uses = "./.github/phpunit/"
 }
 
 action "psalm" {
-  uses = "./actions/psalm/"
+  uses = "./.github/psalm/"
   needs = ["composer"]
 }
 
 action "php-cs-fixer" {
-  uses = "./actions/php-cs-fixer/"
+  uses = "./.github/php-cs-fixer/"
   needs = ["composer"]
   args = "--allow-risky=yes --dry-run --diff --diff-format=udiff -vv"
 }
