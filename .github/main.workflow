@@ -1,4 +1,4 @@
-workflow "Lint" {
+workflow "main" {
   on = "push"
   resolves = [
     "phpunit",
