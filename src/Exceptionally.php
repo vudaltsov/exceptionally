@@ -91,7 +91,7 @@ final class Exceptionally
         set_error_handler([$this, 'handler'], $this->level);
 
         try {
-            return ($this->callable)(...($args ?: $this->args));
+            return ($this->callable)(...$args ?: $this->args);
         } finally {
             restore_error_handler();
         }
