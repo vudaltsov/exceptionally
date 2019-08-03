@@ -13,5 +13,5 @@ action "psalm" {
   uses = "docker://mickaelandrieu/psalm-ga"
   needs = ["PHP-CS-Fixer"]
   secrets = ["GITHUB_TOKEN"]
-  args = " --diff --diff-methods"
+  args = " --diff --diff-methods --root=/github/home"
 }
