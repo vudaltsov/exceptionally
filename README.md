@@ -23,7 +23,7 @@ composer require udaltsov/exceptionally
 
 ## Usage
 
-### exceptionallyRun()
+### exceptionallyCall()
 
 The `exceptionallyCall(callable $callable, mixed ...args): mixed` function allows to execute callables immediately. 
 
