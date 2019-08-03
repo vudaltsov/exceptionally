@@ -120,3 +120,4 @@ Exceptionally throws subclasses of the native [`ErrorException`](https://www.php
 Note that `E_ERROR`, `E_PARSE`, `E_CORE_ERROR`, `E_CORE_WARNING`, `E_COMPILE_ERROR`, `E_COMPILE_WARNING` levels are not supported, because they can not be handled with the [`set_error_handler`](https://www.php.net/manual/en/function.set-error-handler.php) function.
 
 `E_STRICT` is not supported as well, because [it is not used in PHP 7 anymore](https://wiki.php.net/rfc/reclassify_e_strict).
+
