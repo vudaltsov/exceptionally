@@ -18,7 +18,7 @@ try {
 ## Installation
 
 ```bash
-composer require udaltsov/exceptionally
+composer require vudaltsov/exceptionally
 ```
 
 ## Usage
