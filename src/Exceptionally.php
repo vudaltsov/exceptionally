@@ -27,12 +27,6 @@ final class Exceptionally
     private $level = E_ALL;
 
     /**
-     * @var null|callable|string
-     * @psalm-var null|callable(\ErrorException):\Throwable|class-string<\Throwable>
-     */
-    private $exception;
-
-    /**
      * @var bool
      */
     private $ignoreSuppressed = true;
@@ -83,18 +77,6 @@ final class Exceptionally
     }
 
     /**
-     * @param null|callable|string $exception
-     * @psalm-param null|callable(\ErrorException):\Throwable|class-string<\Throwable> $exception
-     */
-    public function exception($exception): self
-    {
-        $new = clone $this;
-        $new->exception = $exception;
-
-        return $new;
-    }
-
-    /**
      * @param mixed[] $args
      *
      * @return mixed
@@ -109,8 +91,6 @@ final class Exceptionally
 
         try {
             return ($this->callable)(...($args ?: $this->args));
-        } catch (\ErrorException $error) {
-            throw $this->wrapError($error);
         } finally {
             restore_error_handler();
         }
@@ -143,20 +123,5 @@ final class Exceptionally
             default:
                 throw new \ErrorException($message, 0, $level, $file, $line);
         }
-    }
-
-    private function wrapError(\ErrorException $error): \Throwable
-    {
-        if (\is_callable($this->exception)) {
-            return ($this->exception)($error);
-        }
-
-        if (\is_string($this->exception)) {
-            $class = $this->exception;
-
-            return new $class($error->getMessage(), 0, $error);
-        }
-
-        return $error;
     }
 }
